@@ -18,11 +18,11 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "bower": "~1.x",
     "grunt": "~0.4.0",
-    "bower": "~1.x"
+    "grunt-contrib-jshint": "~0.6.2"
   },
-  "peerDependencies": {
-  },
+  "peerDependencies": {},
   "engines": {
     "node": ">=0.8.0"
   },
