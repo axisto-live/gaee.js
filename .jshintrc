@@ -1,6 +1,7 @@
 {
   "camelcase": true,
   "curly": true,
+  "es3": true,
   "eqeqeq": true,
   "indent": 4,
   "node": "true",
