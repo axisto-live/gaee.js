@@ -7,7 +7,7 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc'
             },
-            all: ['Gruntfile.js', 'gaee.js']
+            all: ['Gruntfile.js', 'gaee.js', 'test/spec/**/*.js']
         }
 
     });
