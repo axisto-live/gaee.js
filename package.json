@@ -1,0 +1,37 @@
+{
+  "name": "ga-engagement-tracking",
+  "version": "0.0.1",
+  "description": "Track engagement for live and on-demand broadcast",
+  "homepage": "",
+  "bugs": "",
+  "author": {
+    "name": "Tom Loudon"
+  },
+  "contributors": [],
+  "main": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "matchdep": "~0.1.1",
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-copy": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "bower": "~0.x"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0",
+    "bower": "~0.x"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "licenses": []
+}
