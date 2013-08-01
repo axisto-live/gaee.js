@@ -1,6 +1,6 @@
 ### Google Analytics Engagement Events
 
-Library to help track engagement for live and on-demand broadcasts
+Track engagement for live and on-demand broadcast
 
 ### Roadmap
 
