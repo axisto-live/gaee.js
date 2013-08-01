@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (grunt) {
     grunt.initConfig({
 
@@ -5,7 +7,7 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc'
             },
-            all: ['Gruntfile.js']
+            all: ['Gruntfile.js', 'gaee.js']
         }
 
     });

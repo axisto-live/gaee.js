@@ -6,7 +6,7 @@
     "indent": 4,
     "node": "true",
     "quotmark": "single",
-    "strict": false,
+    "strict": true,
     "trailing": true,
     "undef": true,
     "unused": true,
