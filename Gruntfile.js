@@ -13,7 +13,8 @@ module.exports = function (grunt) {
     mocha: {
       src: ['test/index.html'],
       options: {
-        run: true
+        run: true,
+        reporter: 'Spec'
       }
     }
 
