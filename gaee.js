@@ -9,15 +9,15 @@
 'use strict';
 
 function Gaee(account) {
-    this.account = account;
+  this.account = account;
 
-    this.isValidAccount(this.account);
+  this.isValidAccount(this.account);
 }
 
 Gaee.prototype.isValidAccount = function (account) {
-    if (account.match(/^UA-\d{4,9}-\d{1,4}$/)) {
-        return this;
-    } else {
-        throw new Error('Not a valid GA tracking code');
-    }
+  if (account.match(/^UA-\d{4,9}-\d{1,4}$/)) {
+    return this;
+  } else {
+    throw new Error('Not a valid GA tracking code');
+  }
 };

@@ -1,18 +1,26 @@
 'use strict';
 
 module.exports = function (grunt) {
-    grunt.initConfig({
+  grunt.initConfig({
 
-        jshint: {
-            options: {
-                jshintrc: '.jshintrc'
-            },
-            all: ['Gruntfile.js', 'gaee.js', 'test/spec/**/*.js']
-        }
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc'
+      },
+      all: ['Gruntfile.js', 'gaee.js', 'test/spec/**/*.js']
+    },
 
-    });
+    mocha: {
+      src: ['test/index.html'],
+      options: {
+        run: true
+      }
+    }
 
-    grunt.loadNpmTasks('grunt-contrib-jshint');
+  });
 
-    grunt.registerTask('default', ['jshint']);
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-mocha');
+
+  grunt.registerTask('default', ['jshint', 'mocha']);
 };
