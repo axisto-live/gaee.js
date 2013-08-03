@@ -8,13 +8,16 @@
 
 'use strict';
 
-(function () {
+function Gaee(account) {
+    this.account = account;
 
-    var Gaee = function (account, options) {
-        this.account = account;
-        this.options = options;
-    };
+    this.isValidAccount(this.account);
+}
 
-    return Gaee;
-
-})();
+Gaee.prototype.isValidAccount = function (account) {
+    if (account.match(/^UA-\d{4,9}-\d{1,4}$/)) {
+        return this;
+    } else {
+        throw new Error('Not a valid GA tracking code');
+    }
+};
