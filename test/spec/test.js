@@ -11,6 +11,7 @@
     });
 
     afterEach(function () {
+      if (this.gaee.timer != null) this.gaee.stopTimer();
       delete this.gaee;
     });
 
@@ -42,11 +43,54 @@
 
     });
 
-    describe('#startTimer', function () {
+    describe('#startTimer()', function () {
 
       it('should return an interval object', function () {
 
-        expect(this.gaee.startTimer(5000)).to.be.a('number');
+        expect(this.gaee.startTimer(1000)).to.be.a('number');
+
+      });
+
+      it('should not allow multiple timers', function () {
+
+        this.gaee.startTimer(1000);
+
+        var self = this;
+
+        expect(function () {
+          self.gaee.startTimer(500);
+        }).to.throw(Error);
+
+      });
+
+    });
+
+    describe('#stopTimer()', function () {
+
+      it('should clear the timer', function () {
+
+        expect(this.gaee.stopTimer().timer).to.be.null;
+
+      });
+
+    });
+
+    describe('#on()', function () {
+
+      describe('@timedUpdate', function () {
+
+        it('should execute a callback on each interval', function (done) {
+
+          var count = 0;
+
+          this.gaee.on('timeUdated', function() {
+            count++;
+            if (count == 2) done();
+          });
+
+          this.gaee.startTimer(500);
+
+        });
 
       });
 
