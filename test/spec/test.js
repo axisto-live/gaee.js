@@ -42,6 +42,16 @@
 
     });
 
+    describe('#startTimer', function () {
+
+      it('should return an interval object', function () {
+
+        expect(this.gaee.startTimer(5000)).to.be.a('number');
+
+      });
+
+    });
+
   });
 
 })();

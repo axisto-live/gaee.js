@@ -21,3 +21,11 @@ Gaee.prototype.isValidAccount = function (account) {
     throw new Error('Not a valid GA tracking code');
   }
 };
+
+Gaee.prototype.startTimer = function (interval) {
+  var timer = setInterval(function () {
+    
+  }, interval);
+
+  return timer;
+};
