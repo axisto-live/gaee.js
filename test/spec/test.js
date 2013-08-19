@@ -80,7 +80,7 @@
 
     });
 
-    describe.skip('#on()', function () {
+    describe('#on()', function () {
 
       describe('@timedUpdate', function () {
 
