@@ -101,6 +101,30 @@
 
       });
 
+      describe.skip('@buffer', function () {
+
+        it('should execute a callback when playback buffers', function (done) {
+
+          this.gaee.on('buffer', function () {
+            done();
+          });
+
+        });
+
+      });
+
+      describe.skip('@error', function () {
+
+        it('should execute a callback when a playback error occurs', function (done) {
+
+          this.gaee.on('error', function () {
+            done();
+          });
+
+        });
+
+      });
+
     });
 
   });

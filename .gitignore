@@ -1,3 +1,9 @@
+# System Caches
 .DS_Store
+Thumbs.db
 
+# NPM Modules
 node_modules/
+
+# Bower Components
+bower_components/

@@ -15,7 +15,9 @@ function Gaee(account) {
   this.isValidAccount(this.account);
 
   this.events = {
-    timeUdated: []
+    timeUdated: [],
+    buffer: [],
+    error: []
   };
 
 }
