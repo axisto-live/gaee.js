@@ -52,6 +52,10 @@ Gaee.prototype.stopTimer = function () {
   return this;
 };
 
+Gaee.prototype.getTime = function () {
+  return moment().toISOString();
+};
+
 Gaee.prototype.on = function (eventType, callback) {
   this.events[eventType].push(callback);
 };

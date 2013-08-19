@@ -1,4 +1,4 @@
-/* global describe, it, beforeEach, afterEach, expect, Gaee */
+/* global describe, it, beforeEach, afterEach, expect, Gaee, moment */
 
 'use strict';
 
@@ -75,6 +75,16 @@
       it('should clear the timer', function () {
 
         expect(this.gaee.stopTimer().timer).to.equal(null);
+
+      });
+
+    });
+
+    describe('#getTime()', function () {
+
+      it('should return the current time as UTC ISO 8601', function () {
+
+        expect(this.gaee.getTime()).to.match(/\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/);
 
       });
 
