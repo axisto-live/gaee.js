@@ -10,12 +10,13 @@
 
 function Gaee(account) {
   this.account = account;
+  this.timer = null;
 
   this.isValidAccount(this.account);
 
   this.events = {
     timeUdated: []
-  }
+  };
 
 }
 
@@ -28,8 +29,9 @@ Gaee.prototype.isValidAccount = function (account) {
 };
 
 Gaee.prototype.startTimer = function (interval) {
-
-  if (this.timer != null) throw Error('Only one timer allowed');
+  if (this.timer !== null) {
+    throw new Error('Only one timer allowed');
+  }
 
   var self = this;
   this.timer = setInterval(function () {
