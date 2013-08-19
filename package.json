@@ -1,6 +1,6 @@
 {
-  "name": "ga-engagement-tracking",
-  "version": "0.0.1",
+  "name": "gaee.js",
+  "version": "0.1.0",
   "description": "Track engagement for live and on-demand broadcast",
   "homepage": "",
   "bugs": "",
