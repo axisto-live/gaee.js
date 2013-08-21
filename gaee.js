@@ -1,5 +1,5 @@
 /**
-* GAEE.js v0.0.1
+* GAEE.js v0.1.0
 * 
 * MIT licensed
 *
@@ -11,8 +11,6 @@
 function Gaee(account) {
   this.account = account;
   this.timer = null;
-
-  this.isValidAccount(this.account);
 
   this.events = {
     timeUdated: [],

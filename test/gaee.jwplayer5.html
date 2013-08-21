@@ -8,6 +8,8 @@
 <body>
   <div id="mocha"></div>
 
+  <div id="playback"></div>
+
   <script src="../node_modules/mocha/mocha.js"></script>
   <script>mocha.setup('bdd')</script>
 
@@ -18,11 +20,20 @@
   <!-- required modules -->
   <script src="../bower_components/moment/moment.js"></script>
 
+  <!-- required libraries -->
+  <script src="../lib/jwplayer5/jwplayer.min.js"></script>
+
   <!-- include source files -->
   <script src="../gaee.js"></script>
+  <script src="../gaee.jwplayer5.js"></script>
 
   <!-- include spec files -->
-  <script src="spec/test.js"></script>
+  <script src="spec/gaee.js"></script>
+  <script src="spec/gaee.jwplayer5.js"></script>
+
+  <script>
+    mocha.run();
+  </script>
 
 </body>
 </html>
