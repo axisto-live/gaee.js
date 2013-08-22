@@ -1,4 +1,4 @@
-/* global describe, it, beforeEach, afterEach, expect, jwplayer, JWPlayer5 */
+/* global describe, it, before, after, expect, _gaq, jwplayer, JWPlayer5 */
 
 'use strict';
 
@@ -45,9 +45,7 @@
 
       it('should send a play event', function (done) {
 
-        var self = this;
-
-        this.gaee.on('send', function (data) {
+        this.gaee.on('send', function () {
           done();
         });
 
@@ -61,9 +59,7 @@
 
       it('should send a pause event', function (done) {
 
-        var self = this;
-
-        this.gaee.on('send', function (data) {
+        this.gaee.on('send', function () {
           done();
         });
 

@@ -1,4 +1,4 @@
-/* global describe, it, beforeEach, afterEach, expect, Gaee */
+/* global describe, it, beforeEach, afterEach, expect, _gaq, Gaee */
 
 'use strict';
 
@@ -24,9 +24,7 @@
 
       it('should send an event', function (done) {
 
-        var self = this;
-
-        this.gaee.on('send', function (data) {
+        this.gaee.on('send', function () {
           done();
         });
 
