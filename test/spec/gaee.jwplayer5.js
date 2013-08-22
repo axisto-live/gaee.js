@@ -1,11 +1,11 @@
-/* global describe, it, beforeEach, afterEach, expect, Gaee, moment */
+/* global describe, it, beforeEach, afterEach, expect, jwplayer, JWPlayer5 */
 
 'use strict';
 
 (function () {
 
-  var player = jwplayer("playback").setup({
-    flashplayer: "../lib/jwplayer5/player.swf",
+  var player = jwplayer('playback').setup({
+    flashplayer: '../lib/jwplayer5/player.swf',
 
     streamer: 'rtmp://streaming.axisto-live.com/mediacache/_definst_/mp4:',
     file: 'axisto-live-production.s3.amazonaws.com/50ae56f78782bbae0100032f/media/axisto-test-video-v2-450k.mp4',
@@ -45,24 +45,30 @@
 
       it('should send a play event', function (done) {
 
-        this.gaee.player.play();
-
         this.gaee.player.onPlay(function () {
           done();
         });
+
+        this.gaee.player.play();
 
       });
 
     });
 
-    describe('#onIdle()', function () {
+    describe('#onPause()', function () {
 
-      it('should send an idle event', function (done) {
+      it('should send a pause event', function (done) {
+
+        var self = this;
+
+        this.gaee.player.onPause(function () {
+          done();
+        });
 
         this.gaee.player.play();
 
-        this.gaee.player.onIdle(function () {
-          done();
+        this.gaee.player.onPlay(function () {
+          self.gaee.pause();
         });
 
       });

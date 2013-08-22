@@ -13,10 +13,10 @@ function JWPlayer5 (account, player) {
   this.isValidAccount(this.account);
 
   this.player = player;
-
-  this.player.onPlay(function () {
-    console.log('play jwplayer5');
-  });
 }
 
 JWPlayer5.prototype = new Gaee;
+
+JWPlayer5.prototype.on = {
+  
+}

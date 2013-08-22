@@ -1,4 +1,4 @@
-/* global describe, it, beforeEach, afterEach, expect, Gaee, moment */
+/* global describe, it, beforeEach, afterEach, expect, Gaee */
 
 'use strict';
 

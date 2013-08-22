@@ -6,6 +6,8 @@
 * Copyright (C) 2013 Thomas Loudon
 */
 
+/* global moment */
+
 'use strict';
 
 function Gaee(account) {
