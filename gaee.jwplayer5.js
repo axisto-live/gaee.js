@@ -19,7 +19,10 @@ function JWPlayer5 (tracker, player) {
     self.onPlay();
   }).onPause(function () {
     self.onPause();
+  }).onIdle(function () {
+    self.onIdle();
   });
+
 }
 
 JWPlayer5.prototype = new Gaee;
@@ -38,6 +41,16 @@ JWPlayer5.prototype.onPause = function () {
   this.send({
     category: 'gaee.jwplayer5',
     action: 'pause',
+    label: this.player.config.streamer + this.player.config.file
+  });
+
+  return this;
+}
+
+JWPlayer5.prototype.onIdle = function () {
+  this.send({
+    category: 'gaee.jwplayer5',
+    action: 'idle',
     label: this.player.config.streamer + this.player.config.file
   });
 

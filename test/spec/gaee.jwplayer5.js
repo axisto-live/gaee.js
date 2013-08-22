@@ -69,6 +69,22 @@
 
     });
 
+    describe('#onIdle()', function () {
+
+      it('should send an idle event', function (done) {
+
+        this.gaee.on('send', function () {
+          done();
+        });
+
+        this.gaee.player.play();
+
+        this.gaee.player.load('rtmp://nothing');
+
+      });
+
+    });
+
   });
 
 })();
