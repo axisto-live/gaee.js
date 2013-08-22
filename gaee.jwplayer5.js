@@ -8,15 +8,39 @@
 
 'use strict';
 
-function JWPlayer5 (account, player) {
-  Gaee.call(this, account);
-  this.isValidAccount(this.account);
+function JWPlayer5 (tracker, player) {
+  var self = this;
+
+  Gaee.call(this, tracker);
 
   this.player = player;
+
+  this.player.onPlay(function () {
+    self.onPlay();
+  }).onPause(function () {
+    self.onPause();
+  });
 }
 
 JWPlayer5.prototype = new Gaee;
 
-JWPlayer5.prototype.on = {
-  
+JWPlayer5.prototype.onPlay = function () {
+  this.send({
+    category: 'gaee.jwplayer5',
+    action: 'play',
+    label: this.player.config.streamer + this.player.config.file
+  });
+
+  return this;
 }
+
+JWPlayer5.prototype.onPause = function () {
+  this.send({
+    category: 'gaee.jwplayer5',
+    action: 'pause',
+    label: this.player.config.streamer + this.player.config.file
+  });
+
+  return this;
+}
+

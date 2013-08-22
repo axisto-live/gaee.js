@@ -23,11 +23,11 @@
 
     this.gaee = null;
 
-    beforeEach(function () {
-      this.gaee = new JWPlayer5('UA-1234-1', player);
+    before(function () {
+      this.gaee = new JWPlayer5(_gaq, player);
     });
 
-    afterEach(function () {
+    after(function () {
       if (this.gaee.timer !== null) {
         this.gaee.stopTimer();
       }
@@ -45,7 +45,9 @@
 
       it('should send a play event', function (done) {
 
-        this.gaee.player.onPlay(function () {
+        var self = this;
+
+        this.gaee.on('send', function (data) {
           done();
         });
 
@@ -61,15 +63,11 @@
 
         var self = this;
 
-        this.gaee.player.onPause(function () {
+        this.gaee.on('send', function (data) {
           done();
         });
 
-        this.gaee.player.play();
-
-        this.gaee.player.onPlay(function () {
-          self.gaee.pause();
-        });
+        this.gaee.player.pause();
 
       });
 

@@ -10,24 +10,33 @@
 
 'use strict';
 
-function Gaee(account) {
-  this.account = account;
+function Gaee(tracker) {
+  this.tracker = tracker;
   this.timer = null;
 
   this.events = {
     timeUdated: [],
-    buffer: [],
-    error: []
+    send: []
   };
 
 }
 
-Gaee.prototype.isValidAccount = function (account) {
-  if (account.match(/^UA-\d{4,9}-\d{1,4}$/)) {
-    return this;
-  } else {
-    throw new Error('Not a valid GA tracking code');
+Gaee.prototype.send = function (data) {
+  if (data.category.length === 0 || data.action.length === 0) {
+    throw new Error('You must specifiy a \'category\' and an \'action\' to send a tracking event');
   }
+
+  if (data.label.length === 0 && data.value !== undefined) {
+    throw new Error('You must specifiy a \'label\' when providing a \'value\' in a tracking event');
+  }
+
+  this.tracker.push(['_trackEvent', data.category, data.action, data.label, data.value]);
+
+  for (var i = 0; i < this.events.send.length; i++) {
+    this.events.send[i](data);
+  }
+
+  return this;
 };
 
 Gaee.prototype.startTimer = function (interval) {
