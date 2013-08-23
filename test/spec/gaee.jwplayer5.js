@@ -92,24 +92,18 @@
         // Reload the correct media again for further tests
         this.gaee.player.load({
           streamer: 'rtmp://streaming.axisto-live.com/live/streamer-1/mp4:',
-          file: 'stream-test',
+          file: 'stream-test'
         });
 
       });
 
     });
 
-    describe.skip('#onBufferEmpty()', function () {
+    describe('#onBufferEmpty()', function () {
 
       it('should send a buffer empty event', function (done) {
 
         this.timeout(0);
-
-        this.gaee.player.play();
-
-        this.gaee.on('send', function () {
-          done();
-        });
 
       });
 
