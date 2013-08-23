@@ -101,7 +101,7 @@
 
     describe('#onBufferEmpty()', function () {
 
-      it('should send a buffer empty event', function (done) {
+      it('should send a buffer empty event', function () {
 
         this.timeout(0);
 
