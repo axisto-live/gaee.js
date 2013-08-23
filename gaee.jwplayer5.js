@@ -13,25 +13,25 @@ function JWPlayer5 (tracker, player) {
 
   Gaee.call(this, tracker);
 
+  this.state = null;
+  this.duration = 0;
+  this.interval = 1000;
+
   this.timer = setInterval(function () {
     self.monitorStream();
-  }, 1000);
+    self.duration += self.interval;
+  }, this.interval);
 
   this.player = player;
 
-  this.player.onReady(function () {
-    console.log('onReady');
-  }).onPlay(function () {
+  this.player.onPlay(function () {
     self.onPlay();
-    console.log('onPlay');
   }).onPause(function () {
     self.onPause();
-    console.log('onPause');
   }).onIdle(function () {
     self.onIdle();
-    console.log('onIdle');
   }).onError(function (error) {
-    console.log('onError', error.message);
+    self.onError(error);
   });
 
 }
@@ -43,25 +43,27 @@ JWPlayer5.prototype.monitorStream = function () {
 
   if (metadata.code === 'NetStream.Play.Start') {
     // Stream starting up
-    console.log('NetStream.Play.Start');
+    // console.log('NetStream.Play.Start');
   } else if (metadata.code === 'NetStream.Buffer.Full') {
     // Stream playing
-    console.log('NetStream.Buffer.Full');
+    this.onBufferFull();
+    // console.log('NetStream.Buffer.Full');
   } else if (metadata.code === 'NetStream.Buffer.Flush') {
     // Stream paused
-    console.log('NetStream.Buffer.Flush');
+    // console.log('NetStream.Buffer.Flush');
   } else if (metadata.code === 'NetStream.Buffer.Empty') {
     // Bandwidth problems
-    console.log('NetStream.Buffer.Empty');
+    this.onBufferEmpty();
+    // console.log('NetStream.Buffer.Empty');
   } else if (metadata.code === 'NetConnection.Connect.NetworkChange') {
     // Network switch i.e. wired to wireless
-    console.log('NetConnection.Connect.NetworkChange');
+    // console.log('NetConnection.Connect.NetworkChange');
   } else if (metadata.code === 'NetConnection.Connect.Closed') {
     // Connection closed
-    console.log('NetConnection.Connect.Closed');
+    // console.log('NetConnection.Connect.Closed');
   } else if (metadata.code === 'NetConnection.Connect.Failed') {
     // No network connection
-    console.log('NetConnection.Connect.Failed');
+    // console.log('NetConnection.Connect.Failed');
   }
 
   return this;
@@ -71,7 +73,7 @@ JWPlayer5.prototype.onPlay = function () {
   this.send({
     category: 'gaee.jwplayer5',
     action: 'play',
-    label: this.player.config.streamer + this.player.config.file
+    label: this.player.config.streamer + '/' + this.player.config.file
   });
 
   return this;
@@ -81,7 +83,7 @@ JWPlayer5.prototype.onPause = function () {
   this.send({
     category: 'gaee.jwplayer5',
     action: 'pause',
-    label: this.player.config.streamer + this.player.config.file
+    label: this.player.config.streamer + '/' + this.player.config.file
   });
 
   return this;
@@ -91,18 +93,40 @@ JWPlayer5.prototype.onIdle = function () {
   this.send({
     category: 'gaee.jwplayer5',
     action: 'idle',
-    label: this.player.config.streamer + this.player.config.file
+    label: this.player.config.streamer + '/' + this.player.config.file
   });
 
   return this;
 }
 
 JWPlayer5.prototype.onBufferEmpty = function () {
-  this.send({
-    category: 'gaee.jwplayer5',
-    action: 'buffer empty',
-    label: this.player.config.streamer + this.player.config.file
-  });
+  if (this.state !== 'buffering') {
+    this.send({
+      category: 'gaee.jwplayer5',
+      action: 'buffer empty',
+      label: this.player.config.streamer + '/' + this.player.config.file,
+      value: this.duration / 1000
+    });
+
+    this.duration = 0;
+    this.state = 'buffering';
+  }
+
+  return this;
+}
+
+JWPlayer5.prototype.onBufferFull = function () {
+  if (this.state === 'buffering') {
+    this.send({
+      category: 'gaee.jwplayer5',
+      action: 'buffer full',
+      label: this.player.config.streamer + '/' + this.player.config.file,
+      value: this.duration / 1000
+    });
+
+    this.duration = 0;
+    this.state = 'playing';
+  }
 
   return this;
 }

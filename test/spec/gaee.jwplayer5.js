@@ -7,14 +7,16 @@
   var player = jwplayer('playback').setup({
     flashplayer: '../lib/jwplayer5/player.swf',
 
-    streamer: 'rtmp://streaming.axisto-live.com/mediacache/_definst_/mp4:',
-    file: 'axisto-live-production.s3.amazonaws.com/50ae56f78782bbae0100032f/media/axisto-test-video-v2-450k.mp4',
+    streamer: 'rtmp://streaming.axisto-live.com/live/streamer-1',
+    file: 'stream-test',
+    // streamer: 'rtmp://streaming.axisto-live.com/mediacache/_definst_/mp4:',
+    // file: 'axisto-live-production.s3.amazonaws.com/50ae56f78782bbae0100032f/media/axisto-test-video-v2-450k.mp4',
 
     autostart: false,
     volume: 100,
 
-    width: 320,
-    height: 180,
+    width: 480,
+    height: 270,
 
     debug: false
   });
@@ -44,6 +46,8 @@
     describe('#onPlay()', function () {
 
       it('should send a play event', function (done) {
+
+        this.timeout(4000);
 
         this.gaee.on('send', function () {
           done();
@@ -79,7 +83,33 @@
 
         this.gaee.player.play();
 
-        this.gaee.player.load('rtmp://nothing');
+        // Load a non-existant media URL to trigger an idle event
+        this.gaee.player.load({
+          streamer: 'rtmp://streaming.axisto-live.com/live/streamer-1/mp4:',
+          file: 'stream-will-fail',
+        });
+
+        // Reload the correct media again for further tests
+        this.gaee.player.load({
+          streamer: 'rtmp://streaming.axisto-live.com/live/streamer-1/mp4:',
+          file: 'stream-test',
+        });
+
+      });
+
+    });
+
+    describe.skip('#onBufferEmpty()', function () {
+
+      it('should send a buffer empty event', function (done) {
+
+        this.timeout(0);
+
+        this.gaee.player.play();
+
+        this.gaee.on('send', function () {
+          done();
+        });
 
       });
 
