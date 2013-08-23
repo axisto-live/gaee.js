@@ -2,6 +2,22 @@
 
 Track engagement for live and on-demand broadcast
 
+### Errors
+
+#### Buffering
+
+Since the `onBuffer` event is fired as the media starts up we don't want to report it. Reporting the initial buffering phase would give the false impression that everyone experiences buffering issues.
+
+Instead jwplayer's metadata.code value is monitored for the value 'NetStream.Buffer.Empty'.
+
+##### Format
+
+    {
+      category: 'gaee.jwplayer',
+      action: 'buffer',
+      label: stream_url
+    }
+
 ### Roadmap
 
 - Grunt.js and Bower support
