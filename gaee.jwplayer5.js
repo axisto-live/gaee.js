@@ -73,7 +73,7 @@ JWPlayer5.prototype.onPlay = function () {
   this.send({
     category: 'gaee.jwplayer5',
     action: 'play',
-    label: this.player.config.streamer + '/' + this.player.config.file
+    label: '[' + this.uuid + '] [' + this.getTime() + ']'
   });
 
   return this;
@@ -83,7 +83,7 @@ JWPlayer5.prototype.onPause = function () {
   this.send({
     category: 'gaee.jwplayer5',
     action: 'pause',
-    label: this.player.config.streamer + '/' + this.player.config.file
+    label: '[' + this.uuid + '] [' + this.getTime() + ']'
   });
 
   return this;
@@ -93,7 +93,7 @@ JWPlayer5.prototype.onIdle = function () {
   this.send({
     category: 'gaee.jwplayer5',
     action: 'idle',
-    label: this.player.config.streamer + '/' + this.player.config.file
+    label: '[' + this.uuid + '] [' + this.getTime() + ']'
   });
 
   return this;
@@ -104,7 +104,7 @@ JWPlayer5.prototype.onBufferEmpty = function () {
     this.send({
       category: 'gaee.jwplayer5',
       action: 'buffer empty',
-      label: this.player.config.streamer + '/' + this.player.config.file,
+      label: '[' + this.uuid + '] [' + this.getTime() + ']',
       value: this.duration / 1000
     });
 
@@ -120,13 +120,23 @@ JWPlayer5.prototype.onBufferFull = function () {
     this.send({
       category: 'gaee.jwplayer5',
       action: 'buffer full',
-      label: this.player.config.streamer + '/' + this.player.config.file,
+      label: '[' + this.uuid + '] [' + this.getTime() + ']',
       value: this.duration / 1000
     });
 
     this.duration = 0;
     this.state = 'playing';
   }
+
+  return this;
+}
+
+JWPlayer5.prototype.onError = function (error) {
+  this.send({
+    category: 'gaee.jwplayer5',
+    action: 'error - ' + error.message,
+    label: '[' + this.uuid + '] [' + this.getTime() + ']'
+  });
 
   return this;
 }

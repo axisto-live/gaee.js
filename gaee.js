@@ -14,6 +14,11 @@ function Gaee(tracker) {
   this.tracker = tracker;
   this.timer = null;
 
+  this.uuid = 'xxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+    return v.toString(16);
+  });
+
   this.events = {
     timeUdated: [],
     send: []
@@ -62,7 +67,7 @@ Gaee.prototype.stopTimer = function () {
 };
 
 Gaee.prototype.getTime = function () {
-  return moment().toISOString();
+  return moment().toISOString().substring(0, 19) + '.000Z';
 };
 
 Gaee.prototype.on = function (eventType, callback) {
